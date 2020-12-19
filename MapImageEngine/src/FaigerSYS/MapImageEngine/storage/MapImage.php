@@ -2,6 +2,7 @@
 namespace FaigerSYS\MapImageEngine\storage;
 
 use pocketmine\utils\BinaryStream;
+use pocketmine\utils\MainLogger;
 use pocketmine\utils\UUID;
 
 use pocketmine\network\mcpe\protocol\BatchPacket;
@@ -266,6 +267,7 @@ class MapImage {
 			$state = self::R_OK;
 			return new MapImage($blocks_width, $blocks_height, $chunks, $uuid);
 		} catch (\Throwable $e) {
+		    MainLogger::getLogger()->logException($e);
 			$state = self::R_CORRUPTED;
 		}
 	}
